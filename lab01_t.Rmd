@@ -1,0 +1,81 @@
+---
+title: "Lab01 - t tests"
+author: "Your Name Here"
+output: pdf_document
+---
+
+## Goals
+
+Your goal is to get some practice working with data sets in R.  The idea is to take the example code I provided for analyzing the mean body temperature and adapt it for analyzing the mean difference in the volumes of the left hippocampus between the twins who are unaffected and affected by schizophrenia.
+
+## Part 1: Reminder of R Markdown
+
+Recall that all R code has to go in between the lines that start with "```{r}" and end with "```".
+
+There are three main ways to run R code.  First, whenever you knit the document, all chunks will be run in a "fresh" R session.
+
+However, as you're going along you will also want to run commands in a working session so that you can check that your code runs without having to knit the whole document.  To do that, you can run individual code chunks by clicking the green "Play" arrow at the top right corner of the chunk.
+
+You can also select individual lines of code you want to run and choose "Run... Run Selected Line(s)" from the menu at the top of the editor window.
+
+Try this with the R code chunk below:
+
+```{r}
+2 + 2
+log(10)
+```
+
+## Part 2: Loading Packages
+
+R comes with a decent amount of built-in functionality, but to do anything useful you will need to load *packages* that contain additional functionality.  You load packages with the `library` command.  For this lab, we will need 3 packages that add extra functionality to R: readr, mosaic, dplyr, and ggplot2.  Calls to load these packages are in the code chunk below.  Go ahead and run this code chunk now.
+
+```{r}
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(mosaic)
+```
+
+## Part 3: Read in the data and take a first look
+
+The following R code reads in the data set from the creativity study, and stores it in a data frame called creativity.  Think of a data frame as R's way of representing a spreadsheet - it's the most common way of storing a data set in R.  The original spreadsheet is stored on my website in a file called a csv file (csv stands for comma separated values).  To read in csv files, we can use a function called read.csv.  We have to give the data frame a name so that we can work with it later.  Here I have called it creativity.  The arrow pointing to the left <- says to store the results of read.csv in the object named on the left side.
+
+Run the code below now to read in the data set.  No need to modify this code.
+
+```{r}
+twins <- read_csv("http://www.evanlray.com/data/sleuth3/ex0202_twins_schizophrenia.csv")
+
+twins <- twins %>% mutate(
+  difference = Unaffected - Affected
+)
+```
+
+Use the `head` function to look at the first 6 rows of the data set (which is called `twins`) .
+
+```{r, echo = FALSE, message = FALSE}
+
+```
+
+Use the `dim` function to find the number of rows (observational units) and columns (variables) in the data set:
+
+```{r, echo = FALSE, message = FALSE}
+
+```
+
+Calculate the mean, median, and standard deviation of differences in volume of the left hippocampus.  I have provided an outline of the code to use.  You need to provide the name of the data frame at the beginning of the first line, and the name of the variable from that data frame to summarize for the mean, median, and sd functions.
+
+```{r, echo = FALSE, message = FALSE}
+ %>%
+  summarize(
+    mean_difference = mean(),
+    median_difference = median(),
+    sd_difference = sd()
+  )
+```
+
+Create a histogram of differences in volume of the left hippocampus (unaffected - affected).  I have provided an outline of the code to use.  You need to specify the name of the data frame, the variable from that data frame to use for the x axis of the plot, and a number of bins to use for the histogram.
+
+```{r, echo = FALSE, message = FALSE, fig.height = 2}
+ggplot(data = , mapping = aes(x = )) +
+  geom_histogram(bins = )
+```
